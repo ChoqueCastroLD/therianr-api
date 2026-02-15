@@ -1,5 +1,6 @@
 import { Elysia, t } from "elysia";
 import { prisma } from "../lib/prisma";
+import { jwtSetup } from "../lib/jwt";
 import { sendWelcomeEmail, sendResetEmail } from "../lib/email";
 
 const USERNAME_REGEX = /^[a-zA-Z0-9_.-]+$/;
@@ -15,6 +16,7 @@ function excludePassword(user: any) {
 }
 
 export const authRoutes = new Elysia({ prefix: "/auth" })
+  .use(jwtSetup)
   .post(
     "/register",
     async ({ body, jwt, set }: any) => {
@@ -56,9 +58,9 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
         age--;
       }
 
-      if (age < 13) {
+      if (age < 18) {
         set.status = 400;
-        return { error: "You must be at least 13 years old to register" };
+        return { error: "You must be at least 18 years old to register" };
       }
 
       const existingEmail = await prisma.user.findUnique({ where: { email: normalizedEmail } });

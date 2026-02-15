@@ -1,7 +1,5 @@
 import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
-import { jwt } from "@elysiajs/jwt";
-import { bearer } from "@elysiajs/bearer";
 
 import { authRoutes } from "./routes/auth";
 import { profileRoutes } from "./routes/profile";
@@ -33,6 +31,7 @@ const PORT = parseInt(process.env.PORT || "3000");
 
 const allowedOrigins = [
   "http://localhost:3000",
+  "http://localhost:4000",
   "http://localhost:5173",
   "https://therianr.com",
   "https://www.therianr.com",
@@ -50,14 +49,6 @@ const app = new Elysia()
       allowedHeaders: ["Content-Type", "Authorization"],
     })
   )
-  .use(
-    jwt({
-      name: "jwt",
-      secret: process.env.JWT_SECRET!,
-      exp: "7d",
-    })
-  )
-  .use(bearer())
   .onError(({ code, error, set }) => {
     if (code === "VALIDATION") {
       set.status = 400;

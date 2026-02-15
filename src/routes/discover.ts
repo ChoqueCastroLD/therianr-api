@@ -56,29 +56,15 @@ export const discoverRoutes = new Elysia({ prefix: "/discover" })
         theriotypes: { some: {} },
       };
 
-      // Age safety: adults (18+) only see adults, minors (13-17) only see minors
+      // Only show 18+ users (platform is 18+ only)
       const currentUser = await prisma.user.findUnique({
         where: { id: userId },
         select: { birthDate: true, latitude: true, longitude: true },
       });
 
-      if (currentUser) {
-        const now = new Date();
-        let userAge = now.getFullYear() - currentUser.birthDate.getFullYear();
-        const m = now.getMonth() - currentUser.birthDate.getMonth();
-        if (m < 0 || (m === 0 && now.getDate() < currentUser.birthDate.getDate())) userAge--;
-
-        const eighteenYearsAgo = new Date(now.getFullYear() - 18, now.getMonth(), now.getDate());
-
-        if (userAge >= 18) {
-          // Adult: only show 18+ users
-          where.birthDate = { ...(where.birthDate || {}), lte: eighteenYearsAgo };
-        } else {
-          // Minor: only show 13-17 users
-          const thirteenYearsAgo = new Date(now.getFullYear() - 13, now.getMonth(), now.getDate());
-          where.birthDate = { ...(where.birthDate || {}), gt: eighteenYearsAgo, lte: thirteenYearsAgo };
-        }
-      }
+      const now = new Date();
+      const eighteenYearsAgo = new Date(now.getFullYear() - 18, now.getMonth(), now.getDate());
+      where.birthDate = { ...(where.birthDate || {}), lte: eighteenYearsAgo };
 
       if (minAge !== undefined || maxAge !== undefined) {
         const now = new Date();

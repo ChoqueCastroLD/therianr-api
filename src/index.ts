@@ -73,8 +73,8 @@ const app = new Elysia()
       .use(matchRoutes)
       .use(reportRoutes)
       .use(blockRoutes)
+      .get("/health", () => ({ status: "ok", timestamp: new Date().toISOString() }))
   )
-  .get("/health", () => ({ status: "ok", timestamp: new Date().toISOString() }))
   .listen(PORT);
 
 console.log(`Therianr API running at http://localhost:${app.server?.port}`);

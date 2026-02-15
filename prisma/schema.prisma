@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id               String   @id @default(cuid())
+  email            String   @unique
+  username         String   @unique
+  passwordHash     String
+  birthDate        DateTime
+  displayName      String?
+  bio              String?
+  pronouns         String?
+  location         String?
+  latitude         Float?
+  longitude        Float?
+  lookingFor       String[]
+  isOtherkin       Boolean  @default(false)
+  isFurry          Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  activities       String[]
+  awakeningYear    Int?
+  therianType      String?
+  integrationLevel Int?
+  prefAgeMin       Int      @default(18)
+  prefAgeMax       Int      @default(99)
+  prefMaxDistance  Int?
+  prefTheriotypes  String[]
+
+  isBanned Boolean   @default(false)
+  lastSeen DateTime?
+
+  theriotypes    Theriotype[]
+  photos         Photo[]
+  shifts         UserShift[]
+  sentSwipes     Swipe[]      @relation("SentSwipes")
+  receivedSwipes Swipe[]      @relation("ReceivedSwipes")
+  matchesA       Match[]      @relation("MatchUserA")
+  matchesB       Match[]      @relation("MatchUserB")
+  sentMessages   Message[]    @relation("SentMessages")
+  reports        Report[]     @relation("Reporter")
+  reportedBy     Report[]     @relation("Reported")
+  blocks         Block[]      @relation("Blocker")
+  blockedBy      Block[]      @relation("Blocked")
+}
+
+model Theriotype {
+  id        String  @id @default(cuid())
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  species   String
+  category  String
+  isPrimary Boolean @default(false)
+  note      String?
+
+  @@index([userId])
+}
+
+model Photo {
+  id     String  @id @default(cuid())
+  userId String
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  url    String
+  order  Int
+  isGear Boolean @default(false)
+
+  @@index([userId])
+}
+
+model UserShift {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type   String
+
+  @@index([userId])
+}
+
+model Swipe {
+  id        String   @id @default(cuid())
+  swiperId  String
+  swiper    User     @relation("SentSwipes", fields: [swiperId], references: [id], onDelete: Cascade)
+  targetId  String
+  target    User     @relation("ReceivedSwipes", fields: [targetId], references: [id], onDelete: Cascade)
+  type      String
+  createdAt DateTime @default(now())
+
+  @@unique([swiperId, targetId])
+  @@index([swiperId, targetId])
+}
+
+model Match {
+  id        String    @id @default(cuid())
+  userAId   String
+  userA     User      @relation("MatchUserA", fields: [userAId], references: [id], onDelete: Cascade)
+  userBId   String
+  userB     User      @relation("MatchUserB", fields: [userBId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  messages  Message[]
+
+  @@unique([userAId, userBId])
+}
+
+model Message {
+  id        String    @id @default(cuid())
+  matchId   String
+  match     Match     @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  senderId  String
+  sender    User      @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  content   String
+  createdAt DateTime  @default(now())
+  readAt    DateTime?
+
+  @@index([matchId])
+}
+
+model Block {
+  id        String   @id @default(cuid())
+  blockerId String
+  blocker   User     @relation("Blocker", fields: [blockerId], references: [id], onDelete: Cascade)
+  blockedId String
+  blocked   User     @relation("Blocked", fields: [blockedId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([blockerId, blockedId])
+  @@index([blockerId])
+  @@index([blockedId])
+}
+
+model Report {
+  id         String   @id @default(cuid())
+  reporterId String
+  reporter   User     @relation("Reporter", fields: [reporterId], references: [id], onDelete: Cascade)
+  targetId   String
+  target     User     @relation("Reported", fields: [targetId], references: [id], onDelete: Cascade)
+  reason     String
+  details    String?
+  createdAt  DateTime @default(now())
+  status     String   @default("pending")
+}

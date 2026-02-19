@@ -33,8 +33,9 @@ model User {
   prefMaxDistance  Int?
   prefTheriotypes  String[]
 
-  isBanned Boolean   @default(false)
-  lastSeen DateTime?
+  isBanned           Boolean  @default(false)
+  lastSeen           DateTime?
+  onboardingComplete Boolean  @default(false)
 
   theriotypes    Theriotype[]
   photos         Photo[]
@@ -48,6 +49,7 @@ model User {
   reportedBy     Report[]     @relation("Reported")
   blocks         Block[]      @relation("Blocker")
   blockedBy      Block[]      @relation("Blocked")
+  pushTokens     PushToken[]
 }
 
 model Theriotype {
@@ -143,4 +145,17 @@ model Report {
   details    String?
   createdAt  DateTime @default(now())
   status     String   @default("pending")
+}
+
+model PushToken {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String
+  platform  String   // "android", "ios", "web"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, token])
+  @@index([userId])
 }

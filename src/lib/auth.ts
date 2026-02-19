@@ -26,5 +26,10 @@ export const authGuard = new Elysia({ name: "authGuard" })
       throw new Error("User not found");
     }
 
+    if (user.isBanned) {
+      set.status = 403;
+      throw new Error("Account suspended");
+    }
+
     return { userId: payload.sub as string };
   });

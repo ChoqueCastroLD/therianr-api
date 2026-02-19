@@ -1,12 +1,13 @@
 import { Elysia, t } from "elysia";
 import { prisma } from "../lib/prisma";
 import { authGuard } from "../lib/auth";
-import { sendMatchEmail } from "../lib/email";
+import { sendMatchEmail, sendSuperHowlEmail } from "../lib/email";
+import { sendMatchNotification, sendSuperHowlNotification } from "../lib/push-notifications";
 
 const DAILY_SWIPE_LIMIT = 100;
 
-function excludePassword(user: any) {
-  const { passwordHash, ...rest } = user;
+function publicProfile(user: any) {
+  const { passwordHash, email, ...rest } = user;
   return rest;
 }
 
@@ -50,26 +51,19 @@ export const discoverRoutes = new Elysia({ prefix: "/discover" })
         ...blockedMe.map((b) => b.blockerId),
       ];
 
+      // Show all non-banned users who have at least one profile photo
       const where: any = {
         id: { notIn: excludeIds },
         isBanned: false,
-        theriotypes: { some: {} },
+        photos: { some: {} },
       };
 
       // Only show 18+ users (platform is 18+ only)
-      const currentUser = await prisma.user.findUnique({
-        where: { id: userId },
-        select: { birthDate: true, latitude: true, longitude: true },
-      });
-
       const now = new Date();
       const eighteenYearsAgo = new Date(now.getFullYear() - 18, now.getMonth(), now.getDate());
-      where.birthDate = { ...(where.birthDate || {}), lte: eighteenYearsAgo };
+      where.birthDate = { lte: eighteenYearsAgo };
 
       if (minAge !== undefined || maxAge !== undefined) {
-        const now = new Date();
-        if (!where.birthDate) where.birthDate = {};
-
         if (maxAge !== undefined) {
           const minBirthDate = new Date(now.getFullYear() - maxAge - 1, now.getMonth(), now.getDate());
           if (!where.birthDate.gte || minBirthDate > where.birthDate.gte) {
@@ -93,7 +87,7 @@ export const discoverRoutes = new Elysia({ prefix: "/discover" })
         };
       }
 
-      let users = await prisma.user.findMany({
+      const users = await prisma.user.findMany({
         where,
         include: {
           theriotypes: true,
@@ -104,17 +98,8 @@ export const discoverRoutes = new Elysia({ prefix: "/discover" })
         take: limit,
       });
 
-      if (maxDistance !== undefined && currentUser?.latitude && currentUser?.longitude) {
-        users = users.filter((user) => {
-          if (!user.latitude || !user.longitude) return true;
-          return haversineDistance(
-            currentUser.latitude!, currentUser.longitude!,
-            user.latitude, user.longitude
-          ) <= maxDistance;
-        });
-      }
-
-      return users.map(excludePassword);
+      // Location-based filtering disabled: with a small user base everyone sees everyone
+      return users.map(publicProfile);
     }
   )
   .post(
@@ -155,6 +140,26 @@ export const discoverRoutes = new Elysia({ prefix: "/discover" })
         update: { type },
       });
 
+      // Send Super Howl email notification (fire and forget)
+      if (type === "super_howl") {
+        const [currentUser, targetUser] = await Promise.all([
+          prisma.user.findUnique({
+            where: { id: userId },
+            select: { displayName: true, username: true },
+          }),
+          prisma.user.findUnique({
+            where: { id: targetId },
+            select: { email: true, username: true },
+          }),
+        ]);
+
+        if (currentUser && targetUser) {
+          const senderName = currentUser.displayName || currentUser.username;
+          sendSuperHowlEmail(targetUser.email, targetUser.username, senderName);
+          sendSuperHowlNotification(targetId, senderName);
+        }
+      }
+
       if (type === "like" || type === "super_howl") {
         const mutualSwipe = await prisma.swipe.findFirst({
           where: {
@@ -186,8 +191,12 @@ export const discoverRoutes = new Elysia({ prefix: "/discover" })
           if (currentUser && targetProfile) {
             const currentName = currentUser.displayName || currentUser.username;
             const targetName = targetProfile.displayName || targetProfile.username;
+            // Send email notifications
             sendMatchEmail(currentUser.email, currentUser.username, targetName);
             sendMatchEmail(targetProfile.email, targetProfile.username, currentName);
+            // Send push notifications
+            sendMatchNotification(userId, targetName);
+            sendMatchNotification(targetId, currentName);
           }
 
           return { matched: true, matchId: match.id };

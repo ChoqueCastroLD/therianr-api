@@ -84,3 +84,8 @@ export type Block = Prisma.BlockModel
  * 
  */
 export type Report = Prisma.ReportModel
+/**
+ * Model PushToken
+ * 
+ */
+export type PushToken = Prisma.PushTokenModel

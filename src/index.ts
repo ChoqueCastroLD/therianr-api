@@ -7,6 +7,7 @@ import { discoverRoutes } from "./routes/discover";
 import { matchRoutes } from "./routes/matches";
 import { reportRoutes } from "./routes/reports";
 import { blockRoutes } from "./routes/blocks";
+import { notificationRoutes } from "./routes/notifications";
 
 // Validate required environment variables at startup
 const REQUIRED_ENV = [
@@ -73,6 +74,7 @@ const app = new Elysia()
       .use(matchRoutes)
       .use(reportRoutes)
       .use(blockRoutes)
+      .use(notificationRoutes)
       .get("/health", () => ({ status: "ok", timestamp: new Date().toISOString() }))
   )
   .listen(PORT);

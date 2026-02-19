@@ -1,9 +1,11 @@
 import { Elysia, t } from "elysia";
 import { prisma } from "../lib/prisma";
 import { authGuard } from "../lib/auth";
+import { sendNewMessageEmail } from "../lib/email";
+import { sendMessageNotification } from "../lib/push-notifications";
 
-function excludePassword(user: any) {
-  const { passwordHash, ...rest } = user;
+function publicProfile(user: any) {
+  const { passwordHash, email, ...rest } = user;
   return rest;
 }
 
@@ -54,7 +56,7 @@ export const matchRoutes = new Elysia({ prefix: "/matches" })
       return {
         id: match.id,
         createdAt: match.createdAt,
-        otherUser: excludePassword(otherUser),
+        otherUser: publicProfile(otherUser),
         lastMessage,
         unreadCount: unreadMap.get(match.id) || 0,
       };
@@ -143,6 +145,25 @@ export const matchRoutes = new Elysia({ prefix: "/matches" })
           content: content.trim(),
         },
       });
+
+      // Send email notification to recipient (fire and forget)
+      const receiverId = match.userAId === userId ? match.userBId : match.userAId;
+      const [sender, receiver] = await Promise.all([
+        prisma.user.findUnique({
+          where: { id: userId },
+          select: { displayName: true, username: true },
+        }),
+        prisma.user.findUnique({
+          where: { id: receiverId },
+          select: { email: true, username: true },
+        }),
+      ]);
+
+      if (sender && receiver) {
+        const senderName = sender.displayName || sender.username;
+        sendNewMessageEmail(receiver.email, receiver.username, senderName, content.trim());
+        sendMessageNotification(receiverId, senderName, content.trim());
+      }
 
       return message;
     },

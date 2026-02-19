@@ -133,6 +133,11 @@ export const authRoutes = new Elysia({ prefix: "/auth" })
         return { error: "Invalid email or password" };
       }
 
+      if (user.isBanned) {
+        set.status = 403;
+        return { error: "Your account has been suspended. Contact support if you believe this is an error." };
+      }
+
       const token = await jwt.sign({ sub: user.id });
 
       return { token, user: excludePassword(user) };

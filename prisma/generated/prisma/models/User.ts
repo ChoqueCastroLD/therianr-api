@@ -70,6 +70,7 @@ export type UserMinAggregateOutputType = {
   prefMaxDistance: number | null
   isBanned: boolean | null
   lastSeen: Date | null
+  onboardingComplete: boolean | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -96,6 +97,7 @@ export type UserMaxAggregateOutputType = {
   prefMaxDistance: number | null
   isBanned: boolean | null
   lastSeen: Date | null
+  onboardingComplete: boolean | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -125,6 +127,7 @@ export type UserCountAggregateOutputType = {
   prefTheriotypes: number
   isBanned: number
   lastSeen: number
+  onboardingComplete: number
   _all: number
 }
 
@@ -173,6 +176,7 @@ export type UserMinAggregateInputType = {
   prefMaxDistance?: true
   isBanned?: true
   lastSeen?: true
+  onboardingComplete?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -199,6 +203,7 @@ export type UserMaxAggregateInputType = {
   prefMaxDistance?: true
   isBanned?: true
   lastSeen?: true
+  onboardingComplete?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -228,6 +233,7 @@ export type UserCountAggregateInputType = {
   prefTheriotypes?: true
   isBanned?: true
   lastSeen?: true
+  onboardingComplete?: true
   _all?: true
 }
 
@@ -344,6 +350,7 @@ export type UserGroupByOutputType = {
   prefTheriotypes: string[]
   isBanned: boolean
   lastSeen: Date | null
+  onboardingComplete: boolean
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -396,6 +403,7 @@ export type UserWhereInput = {
   prefTheriotypes?: Prisma.StringNullableListFilter<"User">
   isBanned?: Prisma.BoolFilter<"User"> | boolean
   lastSeen?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  onboardingComplete?: Prisma.BoolFilter<"User"> | boolean
   theriotypes?: Prisma.TheriotypeListRelationFilter
   photos?: Prisma.PhotoListRelationFilter
   shifts?: Prisma.UserShiftListRelationFilter
@@ -408,6 +416,7 @@ export type UserWhereInput = {
   reportedBy?: Prisma.ReportListRelationFilter
   blocks?: Prisma.BlockListRelationFilter
   blockedBy?: Prisma.BlockListRelationFilter
+  pushTokens?: Prisma.PushTokenListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -437,6 +446,7 @@ export type UserOrderByWithRelationInput = {
   prefTheriotypes?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   lastSeen?: Prisma.SortOrderInput | Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
   theriotypes?: Prisma.TheriotypeOrderByRelationAggregateInput
   photos?: Prisma.PhotoOrderByRelationAggregateInput
   shifts?: Prisma.UserShiftOrderByRelationAggregateInput
@@ -449,6 +459,7 @@ export type UserOrderByWithRelationInput = {
   reportedBy?: Prisma.ReportOrderByRelationAggregateInput
   blocks?: Prisma.BlockOrderByRelationAggregateInput
   blockedBy?: Prisma.BlockOrderByRelationAggregateInput
+  pushTokens?: Prisma.PushTokenOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -481,6 +492,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   prefTheriotypes?: Prisma.StringNullableListFilter<"User">
   isBanned?: Prisma.BoolFilter<"User"> | boolean
   lastSeen?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  onboardingComplete?: Prisma.BoolFilter<"User"> | boolean
   theriotypes?: Prisma.TheriotypeListRelationFilter
   photos?: Prisma.PhotoListRelationFilter
   shifts?: Prisma.UserShiftListRelationFilter
@@ -493,6 +505,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   reportedBy?: Prisma.ReportListRelationFilter
   blocks?: Prisma.BlockListRelationFilter
   blockedBy?: Prisma.BlockListRelationFilter
+  pushTokens?: Prisma.PushTokenListRelationFilter
 }, "id" | "email" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -522,6 +535,7 @@ export type UserOrderByWithAggregationInput = {
   prefTheriotypes?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   lastSeen?: Prisma.SortOrderInput | Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -559,6 +573,7 @@ export type UserScalarWhereWithAggregatesInput = {
   prefTheriotypes?: Prisma.StringNullableListFilter<"User">
   isBanned?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   lastSeen?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  onboardingComplete?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
 }
 
 export type UserCreateInput = {
@@ -588,6 +603,7 @@ export type UserCreateInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftCreateNestedManyWithoutUserInput
@@ -600,6 +616,7 @@ export type UserCreateInput = {
   reportedBy?: Prisma.ReportCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -629,6 +646,7 @@ export type UserUncheckedCreateInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeUncheckedCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoUncheckedCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftUncheckedCreateNestedManyWithoutUserInput
@@ -641,6 +659,7 @@ export type UserUncheckedCreateInput = {
   reportedBy?: Prisma.ReportUncheckedCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -670,6 +689,7 @@ export type UserUpdateInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUpdateManyWithoutUserNestedInput
@@ -682,6 +702,7 @@ export type UserUpdateInput = {
   reportedBy?: Prisma.ReportUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -711,6 +732,7 @@ export type UserUncheckedUpdateInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUncheckedUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUncheckedUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUncheckedUpdateManyWithoutUserNestedInput
@@ -723,6 +745,7 @@ export type UserUncheckedUpdateInput = {
   reportedBy?: Prisma.ReportUncheckedUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -752,6 +775,7 @@ export type UserCreateManyInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
 }
 
 export type UserUpdateManyMutationInput = {
@@ -781,6 +805,7 @@ export type UserUpdateManyMutationInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -810,6 +835,7 @@ export type UserUncheckedUpdateManyInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type StringNullableListFilter<$PrismaModel = never> = {
@@ -847,6 +873,7 @@ export type UserCountOrderByAggregateInput = {
   prefTheriotypes?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   lastSeen?: Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -883,6 +910,7 @@ export type UserMaxOrderByAggregateInput = {
   prefMaxDistance?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   lastSeen?: Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -909,6 +937,7 @@ export type UserMinOrderByAggregateInput = {
   prefMaxDistance?: Prisma.SortOrder
   isBanned?: Prisma.SortOrder
   lastSeen?: Prisma.SortOrder
+  onboardingComplete?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -1165,6 +1194,20 @@ export type UserUpdateOneRequiredWithoutReportedByNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReportedByInput, Prisma.UserUpdateWithoutReportedByInput>, Prisma.UserUncheckedUpdateWithoutReportedByInput>
 }
 
+export type UserCreateNestedOneWithoutPushTokensInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPushTokensInput, Prisma.UserUncheckedCreateWithoutPushTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPushTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPushTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPushTokensInput, Prisma.UserUncheckedCreateWithoutPushTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPushTokensInput
+  upsert?: Prisma.UserUpsertWithoutPushTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPushTokensInput, Prisma.UserUpdateWithoutPushTokensInput>, Prisma.UserUncheckedUpdateWithoutPushTokensInput>
+}
+
 export type UserCreateWithoutTheriotypesInput = {
   id?: string
   email: string
@@ -1192,6 +1235,7 @@ export type UserCreateWithoutTheriotypesInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   photos?: Prisma.PhotoCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftCreateNestedManyWithoutUserInput
   sentSwipes?: Prisma.SwipeCreateNestedManyWithoutSwiperInput
@@ -1203,6 +1247,7 @@ export type UserCreateWithoutTheriotypesInput = {
   reportedBy?: Prisma.ReportCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTheriotypesInput = {
@@ -1232,6 +1277,7 @@ export type UserUncheckedCreateWithoutTheriotypesInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   photos?: Prisma.PhotoUncheckedCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftUncheckedCreateNestedManyWithoutUserInput
   sentSwipes?: Prisma.SwipeUncheckedCreateNestedManyWithoutSwiperInput
@@ -1243,6 +1289,7 @@ export type UserUncheckedCreateWithoutTheriotypesInput = {
   reportedBy?: Prisma.ReportUncheckedCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTheriotypesInput = {
@@ -1288,6 +1335,7 @@ export type UserUpdateWithoutTheriotypesInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   photos?: Prisma.PhotoUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUpdateManyWithoutUserNestedInput
   sentSwipes?: Prisma.SwipeUpdateManyWithoutSwiperNestedInput
@@ -1299,6 +1347,7 @@ export type UserUpdateWithoutTheriotypesInput = {
   reportedBy?: Prisma.ReportUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTheriotypesInput = {
@@ -1328,6 +1377,7 @@ export type UserUncheckedUpdateWithoutTheriotypesInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   photos?: Prisma.PhotoUncheckedUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUncheckedUpdateManyWithoutUserNestedInput
   sentSwipes?: Prisma.SwipeUncheckedUpdateManyWithoutSwiperNestedInput
@@ -1339,6 +1389,7 @@ export type UserUncheckedUpdateWithoutTheriotypesInput = {
   reportedBy?: Prisma.ReportUncheckedUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPhotosInput = {
@@ -1368,6 +1419,7 @@ export type UserCreateWithoutPhotosInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftCreateNestedManyWithoutUserInput
   sentSwipes?: Prisma.SwipeCreateNestedManyWithoutSwiperInput
@@ -1379,6 +1431,7 @@ export type UserCreateWithoutPhotosInput = {
   reportedBy?: Prisma.ReportCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPhotosInput = {
@@ -1408,6 +1461,7 @@ export type UserUncheckedCreateWithoutPhotosInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeUncheckedCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftUncheckedCreateNestedManyWithoutUserInput
   sentSwipes?: Prisma.SwipeUncheckedCreateNestedManyWithoutSwiperInput
@@ -1419,6 +1473,7 @@ export type UserUncheckedCreateWithoutPhotosInput = {
   reportedBy?: Prisma.ReportUncheckedCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPhotosInput = {
@@ -1464,6 +1519,7 @@ export type UserUpdateWithoutPhotosInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUpdateManyWithoutUserNestedInput
   sentSwipes?: Prisma.SwipeUpdateManyWithoutSwiperNestedInput
@@ -1475,6 +1531,7 @@ export type UserUpdateWithoutPhotosInput = {
   reportedBy?: Prisma.ReportUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPhotosInput = {
@@ -1504,6 +1561,7 @@ export type UserUncheckedUpdateWithoutPhotosInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUncheckedUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUncheckedUpdateManyWithoutUserNestedInput
   sentSwipes?: Prisma.SwipeUncheckedUpdateManyWithoutSwiperNestedInput
@@ -1515,6 +1573,7 @@ export type UserUncheckedUpdateWithoutPhotosInput = {
   reportedBy?: Prisma.ReportUncheckedUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutShiftsInput = {
@@ -1544,6 +1603,7 @@ export type UserCreateWithoutShiftsInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoCreateNestedManyWithoutUserInput
   sentSwipes?: Prisma.SwipeCreateNestedManyWithoutSwiperInput
@@ -1555,6 +1615,7 @@ export type UserCreateWithoutShiftsInput = {
   reportedBy?: Prisma.ReportCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutShiftsInput = {
@@ -1584,6 +1645,7 @@ export type UserUncheckedCreateWithoutShiftsInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeUncheckedCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoUncheckedCreateNestedManyWithoutUserInput
   sentSwipes?: Prisma.SwipeUncheckedCreateNestedManyWithoutSwiperInput
@@ -1595,6 +1657,7 @@ export type UserUncheckedCreateWithoutShiftsInput = {
   reportedBy?: Prisma.ReportUncheckedCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutShiftsInput = {
@@ -1640,6 +1703,7 @@ export type UserUpdateWithoutShiftsInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUpdateManyWithoutUserNestedInput
   sentSwipes?: Prisma.SwipeUpdateManyWithoutSwiperNestedInput
@@ -1651,6 +1715,7 @@ export type UserUpdateWithoutShiftsInput = {
   reportedBy?: Prisma.ReportUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutShiftsInput = {
@@ -1680,6 +1745,7 @@ export type UserUncheckedUpdateWithoutShiftsInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUncheckedUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUncheckedUpdateManyWithoutUserNestedInput
   sentSwipes?: Prisma.SwipeUncheckedUpdateManyWithoutSwiperNestedInput
@@ -1691,6 +1757,7 @@ export type UserUncheckedUpdateWithoutShiftsInput = {
   reportedBy?: Prisma.ReportUncheckedUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSentSwipesInput = {
@@ -1720,6 +1787,7 @@ export type UserCreateWithoutSentSwipesInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftCreateNestedManyWithoutUserInput
@@ -1731,6 +1799,7 @@ export type UserCreateWithoutSentSwipesInput = {
   reportedBy?: Prisma.ReportCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSentSwipesInput = {
@@ -1760,6 +1829,7 @@ export type UserUncheckedCreateWithoutSentSwipesInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeUncheckedCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoUncheckedCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftUncheckedCreateNestedManyWithoutUserInput
@@ -1771,6 +1841,7 @@ export type UserUncheckedCreateWithoutSentSwipesInput = {
   reportedBy?: Prisma.ReportUncheckedCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSentSwipesInput = {
@@ -1805,6 +1876,7 @@ export type UserCreateWithoutReceivedSwipesInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftCreateNestedManyWithoutUserInput
@@ -1816,6 +1888,7 @@ export type UserCreateWithoutReceivedSwipesInput = {
   reportedBy?: Prisma.ReportCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReceivedSwipesInput = {
@@ -1845,6 +1918,7 @@ export type UserUncheckedCreateWithoutReceivedSwipesInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeUncheckedCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoUncheckedCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftUncheckedCreateNestedManyWithoutUserInput
@@ -1856,6 +1930,7 @@ export type UserUncheckedCreateWithoutReceivedSwipesInput = {
   reportedBy?: Prisma.ReportUncheckedCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReceivedSwipesInput = {
@@ -1901,6 +1976,7 @@ export type UserUpdateWithoutSentSwipesInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUpdateManyWithoutUserNestedInput
@@ -1912,6 +1988,7 @@ export type UserUpdateWithoutSentSwipesInput = {
   reportedBy?: Prisma.ReportUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentSwipesInput = {
@@ -1941,6 +2018,7 @@ export type UserUncheckedUpdateWithoutSentSwipesInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUncheckedUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUncheckedUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUncheckedUpdateManyWithoutUserNestedInput
@@ -1952,6 +2030,7 @@ export type UserUncheckedUpdateWithoutSentSwipesInput = {
   reportedBy?: Prisma.ReportUncheckedUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReceivedSwipesInput = {
@@ -1992,6 +2071,7 @@ export type UserUpdateWithoutReceivedSwipesInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUpdateManyWithoutUserNestedInput
@@ -2003,6 +2083,7 @@ export type UserUpdateWithoutReceivedSwipesInput = {
   reportedBy?: Prisma.ReportUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReceivedSwipesInput = {
@@ -2032,6 +2113,7 @@ export type UserUncheckedUpdateWithoutReceivedSwipesInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUncheckedUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUncheckedUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUncheckedUpdateManyWithoutUserNestedInput
@@ -2043,6 +2125,7 @@ export type UserUncheckedUpdateWithoutReceivedSwipesInput = {
   reportedBy?: Prisma.ReportUncheckedUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMatchesAInput = {
@@ -2072,6 +2155,7 @@ export type UserCreateWithoutMatchesAInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftCreateNestedManyWithoutUserInput
@@ -2083,6 +2167,7 @@ export type UserCreateWithoutMatchesAInput = {
   reportedBy?: Prisma.ReportCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMatchesAInput = {
@@ -2112,6 +2197,7 @@ export type UserUncheckedCreateWithoutMatchesAInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeUncheckedCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoUncheckedCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftUncheckedCreateNestedManyWithoutUserInput
@@ -2123,6 +2209,7 @@ export type UserUncheckedCreateWithoutMatchesAInput = {
   reportedBy?: Prisma.ReportUncheckedCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMatchesAInput = {
@@ -2157,6 +2244,7 @@ export type UserCreateWithoutMatchesBInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftCreateNestedManyWithoutUserInput
@@ -2168,6 +2256,7 @@ export type UserCreateWithoutMatchesBInput = {
   reportedBy?: Prisma.ReportCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMatchesBInput = {
@@ -2197,6 +2286,7 @@ export type UserUncheckedCreateWithoutMatchesBInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeUncheckedCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoUncheckedCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftUncheckedCreateNestedManyWithoutUserInput
@@ -2208,6 +2298,7 @@ export type UserUncheckedCreateWithoutMatchesBInput = {
   reportedBy?: Prisma.ReportUncheckedCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMatchesBInput = {
@@ -2253,6 +2344,7 @@ export type UserUpdateWithoutMatchesAInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUpdateManyWithoutUserNestedInput
@@ -2264,6 +2356,7 @@ export type UserUpdateWithoutMatchesAInput = {
   reportedBy?: Prisma.ReportUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMatchesAInput = {
@@ -2293,6 +2386,7 @@ export type UserUncheckedUpdateWithoutMatchesAInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUncheckedUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUncheckedUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUncheckedUpdateManyWithoutUserNestedInput
@@ -2304,6 +2398,7 @@ export type UserUncheckedUpdateWithoutMatchesAInput = {
   reportedBy?: Prisma.ReportUncheckedUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutMatchesBInput = {
@@ -2344,6 +2439,7 @@ export type UserUpdateWithoutMatchesBInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUpdateManyWithoutUserNestedInput
@@ -2355,6 +2451,7 @@ export type UserUpdateWithoutMatchesBInput = {
   reportedBy?: Prisma.ReportUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMatchesBInput = {
@@ -2384,6 +2481,7 @@ export type UserUncheckedUpdateWithoutMatchesBInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUncheckedUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUncheckedUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUncheckedUpdateManyWithoutUserNestedInput
@@ -2395,6 +2493,7 @@ export type UserUncheckedUpdateWithoutMatchesBInput = {
   reportedBy?: Prisma.ReportUncheckedUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSentMessagesInput = {
@@ -2424,6 +2523,7 @@ export type UserCreateWithoutSentMessagesInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftCreateNestedManyWithoutUserInput
@@ -2435,6 +2535,7 @@ export type UserCreateWithoutSentMessagesInput = {
   reportedBy?: Prisma.ReportCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -2464,6 +2565,7 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeUncheckedCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoUncheckedCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftUncheckedCreateNestedManyWithoutUserInput
@@ -2475,6 +2577,7 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   reportedBy?: Prisma.ReportUncheckedCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -2520,6 +2623,7 @@ export type UserUpdateWithoutSentMessagesInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUpdateManyWithoutUserNestedInput
@@ -2531,6 +2635,7 @@ export type UserUpdateWithoutSentMessagesInput = {
   reportedBy?: Prisma.ReportUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -2560,6 +2665,7 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUncheckedUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUncheckedUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUncheckedUpdateManyWithoutUserNestedInput
@@ -2571,6 +2677,7 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   reportedBy?: Prisma.ReportUncheckedUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBlocksInput = {
@@ -2600,6 +2707,7 @@ export type UserCreateWithoutBlocksInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftCreateNestedManyWithoutUserInput
@@ -2611,6 +2719,7 @@ export type UserCreateWithoutBlocksInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportedBy?: Prisma.ReportCreateNestedManyWithoutTargetInput
   blockedBy?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBlocksInput = {
@@ -2640,6 +2749,7 @@ export type UserUncheckedCreateWithoutBlocksInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeUncheckedCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoUncheckedCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftUncheckedCreateNestedManyWithoutUserInput
@@ -2651,6 +2761,7 @@ export type UserUncheckedCreateWithoutBlocksInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportedBy?: Prisma.ReportUncheckedCreateNestedManyWithoutTargetInput
   blockedBy?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBlocksInput = {
@@ -2685,6 +2796,7 @@ export type UserCreateWithoutBlockedByInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftCreateNestedManyWithoutUserInput
@@ -2696,6 +2808,7 @@ export type UserCreateWithoutBlockedByInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
   reportedBy?: Prisma.ReportCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockCreateNestedManyWithoutBlockerInput
+  pushTokens?: Prisma.PushTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBlockedByInput = {
@@ -2725,6 +2838,7 @@ export type UserUncheckedCreateWithoutBlockedByInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeUncheckedCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoUncheckedCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftUncheckedCreateNestedManyWithoutUserInput
@@ -2736,6 +2850,7 @@ export type UserUncheckedCreateWithoutBlockedByInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   reportedBy?: Prisma.ReportUncheckedCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
+  pushTokens?: Prisma.PushTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBlockedByInput = {
@@ -2781,6 +2896,7 @@ export type UserUpdateWithoutBlocksInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUpdateManyWithoutUserNestedInput
@@ -2792,6 +2908,7 @@ export type UserUpdateWithoutBlocksInput = {
   reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportedBy?: Prisma.ReportUpdateManyWithoutTargetNestedInput
   blockedBy?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBlocksInput = {
@@ -2821,6 +2938,7 @@ export type UserUncheckedUpdateWithoutBlocksInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUncheckedUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUncheckedUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUncheckedUpdateManyWithoutUserNestedInput
@@ -2832,6 +2950,7 @@ export type UserUncheckedUpdateWithoutBlocksInput = {
   reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportedBy?: Prisma.ReportUncheckedUpdateManyWithoutTargetNestedInput
   blockedBy?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutBlockedByInput = {
@@ -2872,6 +2991,7 @@ export type UserUpdateWithoutBlockedByInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUpdateManyWithoutUserNestedInput
@@ -2883,6 +3003,7 @@ export type UserUpdateWithoutBlockedByInput = {
   reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   reportedBy?: Prisma.ReportUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
+  pushTokens?: Prisma.PushTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBlockedByInput = {
@@ -2912,6 +3033,7 @@ export type UserUncheckedUpdateWithoutBlockedByInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUncheckedUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUncheckedUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUncheckedUpdateManyWithoutUserNestedInput
@@ -2923,6 +3045,7 @@ export type UserUncheckedUpdateWithoutBlockedByInput = {
   reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
   reportedBy?: Prisma.ReportUncheckedUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
+  pushTokens?: Prisma.PushTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReportsInput = {
@@ -2952,6 +3075,7 @@ export type UserCreateWithoutReportsInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftCreateNestedManyWithoutUserInput
@@ -2963,6 +3087,7 @@ export type UserCreateWithoutReportsInput = {
   reportedBy?: Prisma.ReportCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportsInput = {
@@ -2992,6 +3117,7 @@ export type UserUncheckedCreateWithoutReportsInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeUncheckedCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoUncheckedCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftUncheckedCreateNestedManyWithoutUserInput
@@ -3003,6 +3129,7 @@ export type UserUncheckedCreateWithoutReportsInput = {
   reportedBy?: Prisma.ReportUncheckedCreateNestedManyWithoutTargetInput
   blocks?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportsInput = {
@@ -3037,6 +3164,7 @@ export type UserCreateWithoutReportedByInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftCreateNestedManyWithoutUserInput
@@ -3048,6 +3176,7 @@ export type UserCreateWithoutReportedByInput = {
   reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
   blocks?: Prisma.BlockCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReportedByInput = {
@@ -3077,6 +3206,7 @@ export type UserUncheckedCreateWithoutReportedByInput = {
   prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
   isBanned?: boolean
   lastSeen?: Date | string | null
+  onboardingComplete?: boolean
   theriotypes?: Prisma.TheriotypeUncheckedCreateNestedManyWithoutUserInput
   photos?: Prisma.PhotoUncheckedCreateNestedManyWithoutUserInput
   shifts?: Prisma.UserShiftUncheckedCreateNestedManyWithoutUserInput
@@ -3088,6 +3218,7 @@ export type UserUncheckedCreateWithoutReportedByInput = {
   reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
   blocks?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
   blockedBy?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+  pushTokens?: Prisma.PushTokenUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReportedByInput = {
@@ -3133,6 +3264,7 @@ export type UserUpdateWithoutReportsInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUpdateManyWithoutUserNestedInput
@@ -3144,6 +3276,7 @@ export type UserUpdateWithoutReportsInput = {
   reportedBy?: Prisma.ReportUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsInput = {
@@ -3173,6 +3306,7 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUncheckedUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUncheckedUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUncheckedUpdateManyWithoutUserNestedInput
@@ -3184,6 +3318,7 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   reportedBy?: Prisma.ReportUncheckedUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutReportedByInput = {
@@ -3224,6 +3359,7 @@ export type UserUpdateWithoutReportedByInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUpdateManyWithoutUserNestedInput
@@ -3235,6 +3371,7 @@ export type UserUpdateWithoutReportedByInput = {
   reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
   blocks?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportedByInput = {
@@ -3264,6 +3401,7 @@ export type UserUncheckedUpdateWithoutReportedByInput = {
   prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
   isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
   theriotypes?: Prisma.TheriotypeUncheckedUpdateManyWithoutUserNestedInput
   photos?: Prisma.PhotoUncheckedUpdateManyWithoutUserNestedInput
   shifts?: Prisma.UserShiftUncheckedUpdateManyWithoutUserNestedInput
@@ -3273,6 +3411,191 @@ export type UserUncheckedUpdateWithoutReportedByInput = {
   matchesB?: Prisma.MatchUncheckedUpdateManyWithoutUserBNestedInput
   sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
+  blocks?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
+  blockedBy?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
+  pushTokens?: Prisma.PushTokenUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPushTokensInput = {
+  id?: string
+  email: string
+  username: string
+  passwordHash: string
+  birthDate: Date | string
+  displayName?: string | null
+  bio?: string | null
+  pronouns?: string | null
+  location?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  lookingFor?: Prisma.UserCreatelookingForInput | string[]
+  isOtherkin?: boolean
+  isFurry?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  activities?: Prisma.UserCreateactivitiesInput | string[]
+  awakeningYear?: number | null
+  therianType?: string | null
+  integrationLevel?: number | null
+  prefAgeMin?: number
+  prefAgeMax?: number
+  prefMaxDistance?: number | null
+  prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
+  isBanned?: boolean
+  lastSeen?: Date | string | null
+  onboardingComplete?: boolean
+  theriotypes?: Prisma.TheriotypeCreateNestedManyWithoutUserInput
+  photos?: Prisma.PhotoCreateNestedManyWithoutUserInput
+  shifts?: Prisma.UserShiftCreateNestedManyWithoutUserInput
+  sentSwipes?: Prisma.SwipeCreateNestedManyWithoutSwiperInput
+  receivedSwipes?: Prisma.SwipeCreateNestedManyWithoutTargetInput
+  matchesA?: Prisma.MatchCreateNestedManyWithoutUserAInput
+  matchesB?: Prisma.MatchCreateNestedManyWithoutUserBInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
+  reportedBy?: Prisma.ReportCreateNestedManyWithoutTargetInput
+  blocks?: Prisma.BlockCreateNestedManyWithoutBlockerInput
+  blockedBy?: Prisma.BlockCreateNestedManyWithoutBlockedInput
+}
+
+export type UserUncheckedCreateWithoutPushTokensInput = {
+  id?: string
+  email: string
+  username: string
+  passwordHash: string
+  birthDate: Date | string
+  displayName?: string | null
+  bio?: string | null
+  pronouns?: string | null
+  location?: string | null
+  latitude?: number | null
+  longitude?: number | null
+  lookingFor?: Prisma.UserCreatelookingForInput | string[]
+  isOtherkin?: boolean
+  isFurry?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  activities?: Prisma.UserCreateactivitiesInput | string[]
+  awakeningYear?: number | null
+  therianType?: string | null
+  integrationLevel?: number | null
+  prefAgeMin?: number
+  prefAgeMax?: number
+  prefMaxDistance?: number | null
+  prefTheriotypes?: Prisma.UserCreateprefTheriotypesInput | string[]
+  isBanned?: boolean
+  lastSeen?: Date | string | null
+  onboardingComplete?: boolean
+  theriotypes?: Prisma.TheriotypeUncheckedCreateNestedManyWithoutUserInput
+  photos?: Prisma.PhotoUncheckedCreateNestedManyWithoutUserInput
+  shifts?: Prisma.UserShiftUncheckedCreateNestedManyWithoutUserInput
+  sentSwipes?: Prisma.SwipeUncheckedCreateNestedManyWithoutSwiperInput
+  receivedSwipes?: Prisma.SwipeUncheckedCreateNestedManyWithoutTargetInput
+  matchesA?: Prisma.MatchUncheckedCreateNestedManyWithoutUserAInput
+  matchesB?: Prisma.MatchUncheckedCreateNestedManyWithoutUserBInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
+  reportedBy?: Prisma.ReportUncheckedCreateNestedManyWithoutTargetInput
+  blocks?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockerInput
+  blockedBy?: Prisma.BlockUncheckedCreateNestedManyWithoutBlockedInput
+}
+
+export type UserCreateOrConnectWithoutPushTokensInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPushTokensInput, Prisma.UserUncheckedCreateWithoutPushTokensInput>
+}
+
+export type UserUpsertWithoutPushTokensInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPushTokensInput, Prisma.UserUncheckedUpdateWithoutPushTokensInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPushTokensInput, Prisma.UserUncheckedCreateWithoutPushTokensInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPushTokensInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPushTokensInput, Prisma.UserUncheckedUpdateWithoutPushTokensInput>
+}
+
+export type UserUpdateWithoutPushTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  birthDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pronouns?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lookingFor?: Prisma.UserUpdatelookingForInput | string[]
+  isOtherkin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFurry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  activities?: Prisma.UserUpdateactivitiesInput | string[]
+  awakeningYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  therianType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  integrationLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  prefAgeMin?: Prisma.IntFieldUpdateOperationsInput | number
+  prefAgeMax?: Prisma.IntFieldUpdateOperationsInput | number
+  prefMaxDistance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theriotypes?: Prisma.TheriotypeUpdateManyWithoutUserNestedInput
+  photos?: Prisma.PhotoUpdateManyWithoutUserNestedInput
+  shifts?: Prisma.UserShiftUpdateManyWithoutUserNestedInput
+  sentSwipes?: Prisma.SwipeUpdateManyWithoutSwiperNestedInput
+  receivedSwipes?: Prisma.SwipeUpdateManyWithoutTargetNestedInput
+  matchesA?: Prisma.MatchUpdateManyWithoutUserANestedInput
+  matchesB?: Prisma.MatchUpdateManyWithoutUserBNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
+  reportedBy?: Prisma.ReportUpdateManyWithoutTargetNestedInput
+  blocks?: Prisma.BlockUpdateManyWithoutBlockerNestedInput
+  blockedBy?: Prisma.BlockUpdateManyWithoutBlockedNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPushTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  birthDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pronouns?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lookingFor?: Prisma.UserUpdatelookingForInput | string[]
+  isOtherkin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFurry?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  activities?: Prisma.UserUpdateactivitiesInput | string[]
+  awakeningYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  therianType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  integrationLevel?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  prefAgeMin?: Prisma.IntFieldUpdateOperationsInput | number
+  prefAgeMax?: Prisma.IntFieldUpdateOperationsInput | number
+  prefMaxDistance?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  prefTheriotypes?: Prisma.UserUpdateprefTheriotypesInput | string[]
+  isBanned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastSeen?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  onboardingComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  theriotypes?: Prisma.TheriotypeUncheckedUpdateManyWithoutUserNestedInput
+  photos?: Prisma.PhotoUncheckedUpdateManyWithoutUserNestedInput
+  shifts?: Prisma.UserShiftUncheckedUpdateManyWithoutUserNestedInput
+  sentSwipes?: Prisma.SwipeUncheckedUpdateManyWithoutSwiperNestedInput
+  receivedSwipes?: Prisma.SwipeUncheckedUpdateManyWithoutTargetNestedInput
+  matchesA?: Prisma.MatchUncheckedUpdateManyWithoutUserANestedInput
+  matchesB?: Prisma.MatchUncheckedUpdateManyWithoutUserBNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
+  reportedBy?: Prisma.ReportUncheckedUpdateManyWithoutTargetNestedInput
   blocks?: Prisma.BlockUncheckedUpdateManyWithoutBlockerNestedInput
   blockedBy?: Prisma.BlockUncheckedUpdateManyWithoutBlockedNestedInput
 }
@@ -3295,6 +3618,7 @@ export type UserCountOutputType = {
   reportedBy: number
   blocks: number
   blockedBy: number
+  pushTokens: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3310,6 +3634,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   reportedBy?: boolean | UserCountOutputTypeCountReportedByArgs
   blocks?: boolean | UserCountOutputTypeCountBlocksArgs
   blockedBy?: boolean | UserCountOutputTypeCountBlockedByArgs
+  pushTokens?: boolean | UserCountOutputTypeCountPushTokensArgs
 }
 
 /**
@@ -3406,6 +3731,13 @@ export type UserCountOutputTypeCountBlockedByArgs<ExtArgs extends runtime.Types.
   where?: Prisma.BlockWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPushTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PushTokenWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3434,6 +3766,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   prefTheriotypes?: boolean
   isBanned?: boolean
   lastSeen?: boolean
+  onboardingComplete?: boolean
   theriotypes?: boolean | Prisma.User$theriotypesArgs<ExtArgs>
   photos?: boolean | Prisma.User$photosArgs<ExtArgs>
   shifts?: boolean | Prisma.User$shiftsArgs<ExtArgs>
@@ -3446,6 +3779,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   reportedBy?: boolean | Prisma.User$reportedByArgs<ExtArgs>
   blocks?: boolean | Prisma.User$blocksArgs<ExtArgs>
   blockedBy?: boolean | Prisma.User$blockedByArgs<ExtArgs>
+  pushTokens?: boolean | Prisma.User$pushTokensArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3476,6 +3810,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   prefTheriotypes?: boolean
   isBanned?: boolean
   lastSeen?: boolean
+  onboardingComplete?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -3505,6 +3840,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   prefTheriotypes?: boolean
   isBanned?: boolean
   lastSeen?: boolean
+  onboardingComplete?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -3534,9 +3870,10 @@ export type UserSelectScalar = {
   prefTheriotypes?: boolean
   isBanned?: boolean
   lastSeen?: boolean
+  onboardingComplete?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "passwordHash" | "birthDate" | "displayName" | "bio" | "pronouns" | "location" | "latitude" | "longitude" | "lookingFor" | "isOtherkin" | "isFurry" | "createdAt" | "updatedAt" | "activities" | "awakeningYear" | "therianType" | "integrationLevel" | "prefAgeMin" | "prefAgeMax" | "prefMaxDistance" | "prefTheriotypes" | "isBanned" | "lastSeen", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "passwordHash" | "birthDate" | "displayName" | "bio" | "pronouns" | "location" | "latitude" | "longitude" | "lookingFor" | "isOtherkin" | "isFurry" | "createdAt" | "updatedAt" | "activities" | "awakeningYear" | "therianType" | "integrationLevel" | "prefAgeMin" | "prefAgeMax" | "prefMaxDistance" | "prefTheriotypes" | "isBanned" | "lastSeen" | "onboardingComplete", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   theriotypes?: boolean | Prisma.User$theriotypesArgs<ExtArgs>
   photos?: boolean | Prisma.User$photosArgs<ExtArgs>
@@ -3550,6 +3887,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   reportedBy?: boolean | Prisma.User$reportedByArgs<ExtArgs>
   blocks?: boolean | Prisma.User$blocksArgs<ExtArgs>
   blockedBy?: boolean | Prisma.User$blockedByArgs<ExtArgs>
+  pushTokens?: boolean | Prisma.User$pushTokensArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -3570,6 +3908,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     reportedBy: Prisma.$ReportPayload<ExtArgs>[]
     blocks: Prisma.$BlockPayload<ExtArgs>[]
     blockedBy: Prisma.$BlockPayload<ExtArgs>[]
+    pushTokens: Prisma.$PushTokenPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3598,6 +3937,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     prefTheriotypes: string[]
     isBanned: boolean
     lastSeen: Date | null
+    onboardingComplete: boolean
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -4004,6 +4344,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   reportedBy<T extends Prisma.User$reportedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   blocks<T extends Prisma.User$blocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$blocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BlockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   blockedBy<T extends Prisma.User$blockedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$blockedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BlockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pushTokens<T extends Prisma.User$pushTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pushTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PushTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4059,6 +4400,7 @@ export interface UserFieldRefs {
   readonly prefTheriotypes: Prisma.FieldRef<"User", 'String[]'>
   readonly isBanned: Prisma.FieldRef<"User", 'Boolean'>
   readonly lastSeen: Prisma.FieldRef<"User", 'DateTime'>
+  readonly onboardingComplete: Prisma.FieldRef<"User", 'Boolean'>
 }
     
 
@@ -4732,6 +5074,30 @@ export type User$blockedByArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.BlockScalarFieldEnum | Prisma.BlockScalarFieldEnum[]
+}
+
+/**
+ * User.pushTokens
+ */
+export type User$pushTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PushToken
+   */
+  select?: Prisma.PushTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PushToken
+   */
+  omit?: Prisma.PushTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PushTokenInclude<ExtArgs> | null
+  where?: Prisma.PushTokenWhereInput
+  orderBy?: Prisma.PushTokenOrderByWithRelationInput | Prisma.PushTokenOrderByWithRelationInput[]
+  cursor?: Prisma.PushTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PushTokenScalarFieldEnum | Prisma.PushTokenScalarFieldEnum[]
 }
 
 /**

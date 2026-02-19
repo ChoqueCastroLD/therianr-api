@@ -26,15 +26,10 @@ export const blockRoutes = new Elysia({ prefix: "/blocks" })
         throw e;
       }
 
-      // Delete any existing match between the two users
+      // Delete any existing match between the two users (userAId is always the lexicographically smaller id)
       const [a, b] = userId < targetId ? [userId, targetId] : [targetId, userId];
       await prisma.match.deleteMany({
-        where: {
-          OR: [
-            { userAId: a, userBId: b },
-            { userAId: b, userBId: a },
-          ],
-        },
+        where: { userAId: a, userBId: b },
       });
 
       return { success: true };

@@ -112,21 +112,21 @@ export const profileRoutes = new Elysia({ prefix: "/profile" })
     },
     {
       body: t.Object({
-        displayName: t.Optional(t.String({ maxLength: 50 })),
-        bio: t.Optional(t.String({ maxLength: 1000 })),
-        pronouns: t.Optional(t.String({ maxLength: 30 })),
-        location: t.Optional(t.String({ maxLength: 100 })),
-        latitude: t.Optional(t.Number()),
-        longitude: t.Optional(t.Number()),
+        displayName: t.Optional(t.Union([t.String({ maxLength: 50 }), t.Null()])),
+        bio: t.Optional(t.Union([t.String({ maxLength: 1000 }), t.Null()])),
+        pronouns: t.Optional(t.Union([t.String({ maxLength: 30 }), t.Null()])),
+        location: t.Optional(t.Union([t.String({ maxLength: 100 }), t.Null()])),
+        latitude: t.Optional(t.Union([t.Number(), t.Null()])),
+        longitude: t.Optional(t.Union([t.Number(), t.Null()])),
         lookingFor: t.Optional(t.Array(t.String({ maxLength: 50 }), { maxItems: 10 })),
         isOtherkin: t.Optional(t.Boolean()),
         isFurry: t.Optional(t.Boolean()),
-        awakeningYear: t.Optional(t.Number()),
-        therianType: t.Optional(t.String({ maxLength: 50 })),
-        integrationLevel: t.Optional(t.Number()),
+        awakeningYear: t.Optional(t.Union([t.Number(), t.Null()])),
+        therianType: t.Optional(t.Union([t.String({ maxLength: 50 }), t.Null()])),
+        integrationLevel: t.Optional(t.Union([t.Number(), t.Null()])),
         prefAgeMin: t.Optional(t.Number()),
         prefAgeMax: t.Optional(t.Number()),
-        prefMaxDistance: t.Optional(t.Number()),
+        prefMaxDistance: t.Optional(t.Union([t.Number(), t.Null()])),
         prefTheriotypes: t.Optional(t.Array(t.String({ maxLength: 100 }), { maxItems: 30 })),
         activities: t.Optional(t.Array(t.String({ maxLength: 50 }), { maxItems: 20 })),
         theriotypes: t.Optional(
@@ -213,6 +213,49 @@ export const profileRoutes = new Elysia({ prefix: "/profile" })
       }),
     }
   )
+  .post("/complete-onboarding", async ({ userId, set }: any) => {
+    const photoCount = await prisma.photo.count({ where: { userId } });
+    if (photoCount < 1) {
+      set.status = 400;
+      return { error: "You must upload at least one profile photo before continuing." };
+    }
+
+    const user = await prisma.user.update({
+      where: { id: userId },
+      data: { onboardingComplete: true },
+      include: USER_INCLUDES,
+    });
+    return excludePassword(user);
+  })
+  .get("/users/:id", async ({ userId, params, set }: any) => {
+    const user = await prisma.user.findUnique({
+      where: { id: params.id, isBanned: false },
+      include: USER_INCLUDES,
+    });
+
+    if (!user) {
+      set.status = 404;
+      return { error: "User not found" };
+    }
+
+    // Check if requester has blocked or is blocked by this user
+    const block = await prisma.block.findFirst({
+      where: {
+        OR: [
+          { blockerId: userId, blockedId: params.id },
+          { blockerId: params.id, blockedId: userId },
+        ],
+      },
+    });
+    if (block) {
+      set.status = 404;
+      return { error: "User not found" };
+    }
+
+    // Return public profile (no email/passwordHash)
+    const { passwordHash, email, ...publicUser } = user as any;
+    return publicUser;
+  })
   .delete("/me", async ({ userId }: any) => {
     const photos = await prisma.photo.findMany({ where: { userId } });
     for (const photo of photos) {
@@ -231,9 +274,10 @@ export const profileRoutes = new Elysia({ prefix: "/profile" })
     return { success: true };
   })
   .delete("/photos/:id", async ({ userId, params, set }: any) => {
-    const photo = await prisma.photo.findUnique({
-      where: { id: params.id },
-    });
+    const [photo, user] = await Promise.all([
+      prisma.photo.findUnique({ where: { id: params.id } }),
+      prisma.user.findUnique({ where: { id: userId }, select: { onboardingComplete: true } }),
+    ]);
 
     if (!photo) {
       set.status = 404;
@@ -243,6 +287,15 @@ export const profileRoutes = new Elysia({ prefix: "/profile" })
     if (photo.userId !== userId) {
       set.status = 403;
       return { error: "Not authorized to delete this photo" };
+    }
+
+    // Prevent deleting the last photo if onboarding is already complete
+    if (user?.onboardingComplete) {
+      const photoCount = await prisma.photo.count({ where: { userId } });
+      if (photoCount <= 1) {
+        set.status = 400;
+        return { error: "You must keep at least one profile photo." };
+      }
     }
 
     const key = getKeyFromUrl(photo.url);

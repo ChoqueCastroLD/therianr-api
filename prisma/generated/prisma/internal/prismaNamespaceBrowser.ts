@@ -59,7 +59,8 @@ export const ModelName = {
   Match: 'Match',
   Message: 'Message',
   Block: 'Block',
-  Report: 'Report'
+  Report: 'Report',
+  PushToken: 'PushToken'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -104,7 +105,8 @@ export const UserScalarFieldEnum = {
   prefMaxDistance: 'prefMaxDistance',
   prefTheriotypes: 'prefTheriotypes',
   isBanned: 'isBanned',
-  lastSeen: 'lastSeen'
+  lastSeen: 'lastSeen',
+  onboardingComplete: 'onboardingComplete'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -196,6 +198,18 @@ export const ReportScalarFieldEnum = {
 } as const
 
 export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
+
+
+export const PushTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
+  platform: 'platform',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PushTokenScalarFieldEnum = (typeof PushTokenScalarFieldEnum)[keyof typeof PushTokenScalarFieldEnum]
 
 
 export const SortOrder = {
